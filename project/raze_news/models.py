@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.core.validators import MaxValueValidator
 
 
 class Author(models.Model):
@@ -16,9 +17,9 @@ class Author(models.Model):
 
 
 sport = 'SP'
-politics = "PL"
-education = "ED"
-culture = "CU"
+politics = 'PL'
+education = 'ED'
+culture = 'CU'
 
 CATEGORIES = [
     (sport, 'Спорт'),
@@ -32,8 +33,8 @@ class Category(models.Model):
     name_category = models.CharField(max_length=2, choices=CATEGORIES, unique=True)
 
 
-article = "A"
-news = "N"
+article = 'A'
+news = 'N'
 KIND = [
     (article, 'Статья'),
     (news, 'Новость')
@@ -60,7 +61,7 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
-        return f'{self.text[0:124]}...'
+        return f'{self.content[0:20]}...'
 
 
 class PostCategory(models.Model):
@@ -82,3 +83,12 @@ class Comment(models.Model):
     def dislike(self):
         self.comment_rating -= 1
         self.save()
+
+
+class News(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    description = models.TextField()
+    quantity_str = models.IntegerField(validators=[MaxValueValidator(20)])
+
+    def __str__(self):
+        return f'{self.name.title()}: {self.description[:20]}'

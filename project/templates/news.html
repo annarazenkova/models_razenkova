@@ -1,0 +1,17 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   <h1>Все новости</h1>
+   <h3>{{ time_now|date:'M d Y' }}</h3>
+   {% if news %}
+       {{ news }}
+   {% else %}
+        <h2>Новостей нет!</h2>
+   {% endif %}
+{% endblock content %}
