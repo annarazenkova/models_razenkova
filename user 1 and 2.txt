@@ -1,0 +1,31 @@
+Windows PowerShell
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+Попробуйте новую кроссплатформенную оболочку PowerShell (https://aka.ms/pscore6)
+
+PS C:\Users\811294\Documents\Skillfactory\Django\models_razenkova> cd project
+PS C:\Users\811294\Documents\Skillfactory\Django\models_razenkova\project> python manage.py shell
+Python 3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.                          
+(InteractiveConsole)
+>>> from raze_news.models import *
+
+>>> User.objects.create_user('Pushkin')
+<User: Pushkin>
+>>> User.objects.create_user('Tolstoy')
+<User: Tolstoy>
+>>> 
+>>> author1 = Author(author_id=1)  
+>>> author1.save()
+>>> Author.objects.create(author_id=2)
+<Author: Author object (2)>
+>>> 
+>>> c1 = Category.objects.create(name_category="PL")  
+>>> c2 = Category.objects.create(name_category="ED")
+>>> c3 = Category.objects.create(name_category=sport)
+>>> c4 = Category.objects.create(name_category=culture)
+
+>>> art1 = Post.objects.create(title="bad weather", author_id=1)     
+>>> art2 = Post.objects.create(title="good weather", author_id=1, post_kind=culture)
+>>> news1 = Post.objects.create(title="city news", author_id=2)
+
